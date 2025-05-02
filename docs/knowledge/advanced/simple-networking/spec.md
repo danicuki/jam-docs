@@ -163,8 +163,9 @@ Ed25519 Signature = [u8; 64]
 Erasure-Root = [u8; 32]
 Shard Index = u16
 Bundle Shard = [u8]
-Segment Shard = [u8; 12]
+Segment Shard = [u8; 12*]
 ```
+* Segment Shard Size = 12 bytes comes from the fact that segments are 4104 bytes and there are 342 cores. It may differ in other network configurations (e.g. tiny has 2 cores, then segment shard size = 2052)
 
 ### Grid structure
 
@@ -511,7 +512,7 @@ Auditor -> Assurer
 
 ### CE 139/140: Segment shard request
 
-Request for one or more 12-byte segment shards.
+Request for one or more 12-byte segment shards (12-bytes size be different depending on number of cores)
 
 This protocol should be used by guarantors to request import segment shards from assurers in order
 to complete work-package bundles for guaranteeing.
